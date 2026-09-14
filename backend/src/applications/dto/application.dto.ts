@@ -9,6 +9,14 @@ import { ApplicationStatus } from '../../generated/prisma/enums.js';
 export class CreateApplicationDto {
   @IsString()
   scholarshipId!: string;
+
+  @IsOptional()
+  @IsEnum(ApplicationStatus)
+  status?: ApplicationStatus;
+
+  @IsOptional()
+  @IsString()
+  notes?: string;
 }
 
 export class UpdateApplicationDto {

@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDateString,
@@ -25,6 +26,7 @@ export class UpdateScholarshipDto {
   description?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
   amount?: number;
@@ -54,6 +56,7 @@ export class UpdateScholarshipDto {
   state?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
   incomeLimit?: number;

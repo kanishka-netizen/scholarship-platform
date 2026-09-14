@@ -28,17 +28,20 @@ export class ApplicationsController {
     @Param('userId') userId: string,
     @Body() data: CreateApplicationDto,
   ) {
-    return this.applicationsService.createApplication(
-      userId,
-      data.scholarshipId,
-    );
+    return this.applicationsService.createApplication(userId, data);
   }
 
   @Get()
-  async getApplications(
-    @Param('userId') userId: string,
-  ) {
+  async getApplications(@Param('userId') userId: string) {
     return this.applicationsService.getApplications(userId);
+  }
+
+  @Get(':applicationId')
+  async getApplication(
+    @Param('userId') userId: string,
+    @Param('applicationId') applicationId: string,
+  ) {
+    return this.applicationsService.getApplication(userId, applicationId);
   }
 
   @Patch(':applicationId')

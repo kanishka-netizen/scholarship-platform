@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import type { Prisma } from '../generated/prisma/client.js';
 import { ImportScholarshipRecordDto } from './dto/import-scholarships.dto.js';
@@ -88,53 +88,20 @@ export class ScholarshipsService {
     };
   }
   async getScholarshipById(id: string) {
-  return this.prisma.scholarship.findUnique({
-    where: { id },
-  });
-}
+    const scholarship = await this.prisma.scholarship.findUnique({
+      where: { id },
+    });
 
-async createScholarship(data: {
-  name: string;
-  provider: string;
-  description?: string;
-  amount?: number;
-  startDate?: string;
-  deadline?: string;
-  educationLevel?: string;
-  course?: string;
-  branch?: string;
-  state?: string;
-  incomeLimit?: number;
-  applicationUrl?: string;
-  source?: string;
-}) {
-  return this.prisma.scholarship.create({
-    data: {
-      name: data.name,
-      provider: data.provider,
-      description: data.description,
-      amount: data.amount,
-      startDate: data.startDate
-        ? new Date(data.startDate)
-        : undefined,
-      deadline: data.deadline
-        ? new Date(data.deadline)
-        : undefined,
-      educationLevel: data.educationLevel,
-      course: data.course,
-      branch: data.branch,
-      state: data.state,
-      incomeLimit: data.incomeLimit,
-      applicationUrl: data.applicationUrl,
-      source: data.source,
-    },
-  });
-}
-async updateScholarship(
-  id: string,
-  data: {
-    name?: string;
-    provider?: string;
+    if (!scholarship) {
+      throw new NotFoundException('Scholarship not found');
+    }
+
+    return scholarship;
+  }
+
+  async createScholarship(data: {
+    name: string;
+    provider: string;
     description?: string;
     amount?: number;
     startDate?: string;
@@ -148,48 +115,93 @@ async updateScholarship(
     source?: string;
     verified?: boolean;
     active?: boolean;
-  },
-) {
-  return this.prisma.scholarship.update({
-    where: { id },
-    data: {
-      ...(data.name !== undefined && { name: data.name }),
-      ...(data.provider !== undefined && { provider: data.provider }),
-      ...(data.description !== undefined && {
+  }) {
+    return this.prisma.scholarship.create({
+      data: {
+        name: data.name,
+        provider: data.provider,
         description: data.description,
-      }),
-      ...(data.amount !== undefined && { amount: data.amount }),
-      ...(data.startDate !== undefined && {
-        startDate: new Date(data.startDate),
-      }),
-      ...(data.deadline !== undefined && {
-        deadline: new Date(data.deadline),
-      }),
-      ...(data.educationLevel !== undefined && {
+        amount: data.amount,
+        startDate: data.startDate ? new Date(data.startDate) : undefined,
+        deadline: data.deadline ? new Date(data.deadline) : undefined,
         educationLevel: data.educationLevel,
-      }),
-      ...(data.course !== undefined && { course: data.course }),
-      ...(data.branch !== undefined && { branch: data.branch }),
-      ...(data.state !== undefined && { state: data.state }),
-      ...(data.incomeLimit !== undefined && {
+        course: data.course,
+        branch: data.branch,
+        state: data.state,
         incomeLimit: data.incomeLimit,
-      }),
-      ...(data.applicationUrl !== undefined && {
         applicationUrl: data.applicationUrl,
-      }),
-      ...(data.source !== undefined && { source: data.source }),
-      ...(data.verified !== undefined && {
+        source: data.source,
         verified: data.verified,
-      }),
-      ...(data.active !== undefined && { active: data.active }),
+        active: data.active,
+      },
+    });
+  }
+
+  async updateScholarship(
+    id: string,
+    data: {
+      name?: string;
+      provider?: string;
+      description?: string;
+      amount?: number;
+      startDate?: string;
+      deadline?: string;
+      educationLevel?: string;
+      course?: string;
+      branch?: string;
+      state?: string;
+      incomeLimit?: number;
+      applicationUrl?: string;
+      source?: string;
+      verified?: boolean;
+      active?: boolean;
     },
-  });
-}
-async deleteScholarship(id: string) {
-  return this.prisma.scholarship.delete({
-    where: { id },
-  });
-}
+  ) {
+    await this.getScholarshipById(id);
+
+    return this.prisma.scholarship.update({
+      where: { id },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.provider !== undefined && { provider: data.provider }),
+        ...(data.description !== undefined && {
+          description: data.description,
+        }),
+        ...(data.amount !== undefined && { amount: data.amount }),
+        ...(data.startDate !== undefined && {
+          startDate: data.startDate ? new Date(data.startDate) : null,
+        }),
+        ...(data.deadline !== undefined && {
+          deadline: data.deadline ? new Date(data.deadline) : null,
+        }),
+        ...(data.educationLevel !== undefined && {
+          educationLevel: data.educationLevel,
+        }),
+        ...(data.course !== undefined && { course: data.course }),
+        ...(data.branch !== undefined && { branch: data.branch }),
+        ...(data.state !== undefined && { state: data.state }),
+        ...(data.incomeLimit !== undefined && {
+          incomeLimit: data.incomeLimit,
+        }),
+        ...(data.applicationUrl !== undefined && {
+          applicationUrl: data.applicationUrl,
+        }),
+        ...(data.source !== undefined && { source: data.source }),
+        ...(data.verified !== undefined && {
+          verified: data.verified,
+        }),
+        ...(data.active !== undefined && { active: data.active }),
+      },
+    });
+  }
+
+  async deleteScholarship(id: string) {
+    await this.getScholarshipById(id);
+
+    return this.prisma.scholarship.delete({
+      where: { id },
+    });
+  }
 
   async importScholarships(records: ImportScholarshipRecordDto[]) {
     const uniqueRecords = this.uniqueImportRecords(records);

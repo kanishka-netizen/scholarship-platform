@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDateString,
@@ -41,18 +42,22 @@ export class ProfileDto {
   branch?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   yearOfStudy?: number;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   semester?: number;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   currentPercentage?: number;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   currentCGPA?: number;
 
@@ -61,10 +66,12 @@ export class ProfileDto {
   previousQualification?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   previousPercentage?: number;
 
   @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   annualFamilyIncome?: number;
 
@@ -77,6 +84,7 @@ export class ProfileDto {
   ews?: boolean;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   dependents?: number;
 

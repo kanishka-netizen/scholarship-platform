@@ -28,6 +28,7 @@ export type SavedScholarshipMinAggregateOutputType = {
   id: string | null
   userId: string | null
   scholarshipId: string | null
+  notes: string | null
   createdAt: Date | null
 }
 
@@ -35,6 +36,7 @@ export type SavedScholarshipMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   scholarshipId: string | null
+  notes: string | null
   createdAt: Date | null
 }
 
@@ -42,6 +44,7 @@ export type SavedScholarshipCountAggregateOutputType = {
   id: number
   userId: number
   scholarshipId: number
+  notes: number
   createdAt: number
   _all: number
 }
@@ -51,6 +54,7 @@ export type SavedScholarshipMinAggregateInputType = {
   id?: true
   userId?: true
   scholarshipId?: true
+  notes?: true
   createdAt?: true
 }
 
@@ -58,6 +62,7 @@ export type SavedScholarshipMaxAggregateInputType = {
   id?: true
   userId?: true
   scholarshipId?: true
+  notes?: true
   createdAt?: true
 }
 
@@ -65,6 +70,7 @@ export type SavedScholarshipCountAggregateInputType = {
   id?: true
   userId?: true
   scholarshipId?: true
+  notes?: true
   createdAt?: true
   _all?: true
 }
@@ -145,6 +151,7 @@ export type SavedScholarshipGroupByOutputType = {
   id: string
   userId: string
   scholarshipId: string
+  notes: string | null
   createdAt: Date
   _count: SavedScholarshipCountAggregateOutputType | null
   _min: SavedScholarshipMinAggregateOutputType | null
@@ -173,6 +180,7 @@ export type SavedScholarshipWhereInput = {
   id?: Prisma.StringFilter<"SavedScholarship"> | string
   userId?: Prisma.StringFilter<"SavedScholarship"> | string
   scholarshipId?: Prisma.StringFilter<"SavedScholarship"> | string
+  notes?: Prisma.StringNullableFilter<"SavedScholarship"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavedScholarship"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   scholarship?: Prisma.XOR<Prisma.ScholarshipScalarRelationFilter, Prisma.ScholarshipWhereInput>
@@ -182,6 +190,7 @@ export type SavedScholarshipOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   scholarshipId?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   scholarship?: Prisma.ScholarshipOrderByWithRelationInput
@@ -195,6 +204,7 @@ export type SavedScholarshipWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SavedScholarshipWhereInput | Prisma.SavedScholarshipWhereInput[]
   userId?: Prisma.StringFilter<"SavedScholarship"> | string
   scholarshipId?: Prisma.StringFilter<"SavedScholarship"> | string
+  notes?: Prisma.StringNullableFilter<"SavedScholarship"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavedScholarship"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   scholarship?: Prisma.XOR<Prisma.ScholarshipScalarRelationFilter, Prisma.ScholarshipWhereInput>
@@ -204,6 +214,7 @@ export type SavedScholarshipOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   scholarshipId?: Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.SavedScholarshipCountOrderByAggregateInput
   _max?: Prisma.SavedScholarshipMaxOrderByAggregateInput
@@ -217,11 +228,13 @@ export type SavedScholarshipScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SavedScholarship"> | string
   userId?: Prisma.StringWithAggregatesFilter<"SavedScholarship"> | string
   scholarshipId?: Prisma.StringWithAggregatesFilter<"SavedScholarship"> | string
+  notes?: Prisma.StringNullableWithAggregatesFilter<"SavedScholarship"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SavedScholarship"> | Date | string
 }
 
 export type SavedScholarshipCreateInput = {
   id?: string
+  notes?: string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSavedInput
   scholarship: Prisma.ScholarshipCreateNestedOneWithoutSavedInput
@@ -231,11 +244,13 @@ export type SavedScholarshipUncheckedCreateInput = {
   id?: string
   userId: string
   scholarshipId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
 export type SavedScholarshipUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSavedNestedInput
   scholarship?: Prisma.ScholarshipUpdateOneRequiredWithoutSavedNestedInput
@@ -245,6 +260,7 @@ export type SavedScholarshipUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   scholarshipId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -252,11 +268,13 @@ export type SavedScholarshipCreateManyInput = {
   id?: string
   userId: string
   scholarshipId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
 export type SavedScholarshipUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -264,6 +282,7 @@ export type SavedScholarshipUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   scholarshipId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -286,6 +305,7 @@ export type SavedScholarshipCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   scholarshipId?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -293,6 +313,7 @@ export type SavedScholarshipMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   scholarshipId?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -300,6 +321,7 @@ export type SavedScholarshipMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   scholarshipId?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -389,6 +411,7 @@ export type SavedScholarshipUncheckedUpdateManyWithoutScholarshipNestedInput = {
 
 export type SavedScholarshipCreateWithoutUserInput = {
   id?: string
+  notes?: string | null
   createdAt?: Date | string
   scholarship: Prisma.ScholarshipCreateNestedOneWithoutSavedInput
 }
@@ -396,6 +419,7 @@ export type SavedScholarshipCreateWithoutUserInput = {
 export type SavedScholarshipUncheckedCreateWithoutUserInput = {
   id?: string
   scholarshipId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
@@ -432,11 +456,13 @@ export type SavedScholarshipScalarWhereInput = {
   id?: Prisma.StringFilter<"SavedScholarship"> | string
   userId?: Prisma.StringFilter<"SavedScholarship"> | string
   scholarshipId?: Prisma.StringFilter<"SavedScholarship"> | string
+  notes?: Prisma.StringNullableFilter<"SavedScholarship"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SavedScholarship"> | Date | string
 }
 
 export type SavedScholarshipCreateWithoutScholarshipInput = {
   id?: string
+  notes?: string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutSavedInput
 }
@@ -444,6 +470,7 @@ export type SavedScholarshipCreateWithoutScholarshipInput = {
 export type SavedScholarshipUncheckedCreateWithoutScholarshipInput = {
   id?: string
   userId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
@@ -476,11 +503,13 @@ export type SavedScholarshipUpdateManyWithWhereWithoutScholarshipInput = {
 export type SavedScholarshipCreateManyUserInput = {
   id?: string
   scholarshipId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
 export type SavedScholarshipUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scholarship?: Prisma.ScholarshipUpdateOneRequiredWithoutSavedNestedInput
 }
@@ -488,23 +517,27 @@ export type SavedScholarshipUpdateWithoutUserInput = {
 export type SavedScholarshipUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scholarshipId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SavedScholarshipUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   scholarshipId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SavedScholarshipCreateManyScholarshipInput = {
   id?: string
   userId: string
+  notes?: string | null
   createdAt?: Date | string
 }
 
 export type SavedScholarshipUpdateWithoutScholarshipInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutSavedNestedInput
 }
@@ -512,12 +545,14 @@ export type SavedScholarshipUpdateWithoutScholarshipInput = {
 export type SavedScholarshipUncheckedUpdateWithoutScholarshipInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SavedScholarshipUncheckedUpdateManyWithoutScholarshipInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -527,6 +562,7 @@ export type SavedScholarshipSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   userId?: boolean
   scholarshipId?: boolean
+  notes?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   scholarship?: boolean | Prisma.ScholarshipDefaultArgs<ExtArgs>
@@ -536,6 +572,7 @@ export type SavedScholarshipSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   userId?: boolean
   scholarshipId?: boolean
+  notes?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   scholarship?: boolean | Prisma.ScholarshipDefaultArgs<ExtArgs>
@@ -545,6 +582,7 @@ export type SavedScholarshipSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   userId?: boolean
   scholarshipId?: boolean
+  notes?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   scholarship?: boolean | Prisma.ScholarshipDefaultArgs<ExtArgs>
@@ -554,10 +592,11 @@ export type SavedScholarshipSelectScalar = {
   id?: boolean
   userId?: boolean
   scholarshipId?: boolean
+  notes?: boolean
   createdAt?: boolean
 }
 
-export type SavedScholarshipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "scholarshipId" | "createdAt", ExtArgs["result"]["savedScholarship"]>
+export type SavedScholarshipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "scholarshipId" | "notes" | "createdAt", ExtArgs["result"]["savedScholarship"]>
 export type SavedScholarshipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   scholarship?: boolean | Prisma.ScholarshipDefaultArgs<ExtArgs>
@@ -581,6 +620,7 @@ export type $SavedScholarshipPayload<ExtArgs extends runtime.Types.Extensions.In
     id: string
     userId: string
     scholarshipId: string
+    notes: string | null
     createdAt: Date
   }, ExtArgs["result"]["savedScholarship"]>
   composites: {}
@@ -1010,6 +1050,7 @@ export interface SavedScholarshipFieldRefs {
   readonly id: Prisma.FieldRef<"SavedScholarship", 'String'>
   readonly userId: Prisma.FieldRef<"SavedScholarship", 'String'>
   readonly scholarshipId: Prisma.FieldRef<"SavedScholarship", 'String'>
+  readonly notes: Prisma.FieldRef<"SavedScholarship", 'String'>
   readonly createdAt: Prisma.FieldRef<"SavedScholarship", 'DateTime'>
 }
     

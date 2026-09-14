@@ -1051,6 +1051,7 @@ export const SavedScholarshipScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   scholarshipId: 'scholarshipId',
+  notes: 'notes',
   createdAt: 'createdAt'
 } as const
 

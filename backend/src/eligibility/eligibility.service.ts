@@ -1,6 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 
+function normalize(value?: string | null) {
+  return value?.trim().toLowerCase() ?? '';
+}
+
+function isOpenConstraint(value?: string | null) {
+  const text = normalize(value);
+  if (!text) return true;
+
+  return (
+    text.includes('all india') ||
+    text.includes('pan india') ||
+    text.includes('nationwide') ||
+    text.includes('all state') ||
+    ['india', 'national', 'any', 'all', 'na', 'n/a'].includes(text)
+  );
+}
+
+function matchesText(required?: string | null, actual?: string | null) {
+  if (isOpenConstraint(required)) return true;
+
+  const got = normalize(actual);
+  if (!got) return true;
+
+  const need = normalize(required);
+  return need.includes(got) || got.includes(need);
+}
+
 @Injectable()
 export class EligibilityService {
   constructor(private readonly prisma: PrismaService) {}
@@ -11,7 +38,12 @@ export class EligibilityService {
     });
 
     if (!profile) {
-      throw new Error('Student profile not found');
+      return {
+        userId,
+        profileComplete: false,
+        totalEligible: 0,
+        data: [],
+      };
     }
 
     const scholarships = await this.prisma.scholarship.findMany({
@@ -23,59 +55,37 @@ export class EligibilityService {
       const reasons: string[] = [];
       const failedReasons: string[] = [];
 
-      // State
-      if (!scholarship.state) {
-        reasons.push('Available across all states');
-      } else if (
-        profile.state &&
-        scholarship.state.toLowerCase() === profile.state.toLowerCase()
-      ) {
-        reasons.push('State requirement matches');
+      if (isOpenConstraint(scholarship.state)) {
+        reasons.push('Available across India');
+      } else if (matchesText(scholarship.state, profile.state)) {
+        reasons.push(`State matches ${scholarship.state}`);
       } else {
-        failedReasons.push(
-          `Requires students from ${scholarship.state}`,
-        );
+        failedReasons.push(`Requires students from ${scholarship.state}`);
       }
 
-      // Course
-      if (!scholarship.course) {
-        reasons.push('Available for all courses');
-      } else if (
-        profile.course &&
-        scholarship.course
-          .toLowerCase()
-          .includes(profile.course.toLowerCase())
-      ) {
-        reasons.push('Course requirement matches');
+      if (isOpenConstraint(scholarship.course)) {
+        reasons.push('Open to all courses');
+      } else if (matchesText(scholarship.course, profile.course)) {
+        reasons.push(`Course matches ${scholarship.course}`);
       } else {
-        failedReasons.push(
-          `Requires course: ${scholarship.course}`,
-        );
+        failedReasons.push(`Requires course: ${scholarship.course}`);
       }
 
-      // Branch
-      if (!scholarship.branch) {
-        reasons.push('Available for all branches');
-      } else if (
-        profile.branch &&
-        scholarship.branch
-          .toLowerCase()
-          .includes(profile.branch.toLowerCase())
-      ) {
-        reasons.push('Branch requirement matches');
+      if (isOpenConstraint(scholarship.branch)) {
+        reasons.push('Open to all branches');
+      } else if (matchesText(scholarship.branch, profile.branch)) {
+        reasons.push(`Branch matches ${scholarship.branch}`);
       } else {
-        failedReasons.push(
-          `Requires branch: ${scholarship.branch}`,
-        );
+        failedReasons.push(`Requires branch: ${scholarship.branch}`);
       }
 
-      // Income
-      if (scholarship.incomeLimit === null) {
+      if (scholarship.incomeLimit == null) {
         reasons.push('No income limit specified');
-      } else if (
-        profile.annualFamilyIncome !== null &&
-        profile.annualFamilyIncome <= scholarship.incomeLimit
-      ) {
+      } else if (profile.annualFamilyIncome == null) {
+        reasons.push(
+          `Confirm family income is ₹${scholarship.incomeLimit} or below`,
+        );
+      } else if (profile.annualFamilyIncome <= scholarship.incomeLimit) {
         reasons.push('Family income is within the limit');
       } else {
         failedReasons.push(
@@ -95,6 +105,7 @@ export class EligibilityService {
 
     return {
       userId,
+      profileComplete: true,
       totalEligible: eligible.length,
       data: eligible,
     };
