@@ -1,0 +1,84 @@
+import {
+  ArrayMinSize,
+  IsArray,
+  IsBoolean,
+  IsDateString,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUrl,
+  Min,
+  MinLength,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class ImportScholarshipRecordDto {
+  @IsString()
+  @MinLength(2)
+  name!: string;
+
+  @IsString()
+  @MinLength(2)
+  provider!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  amount?: number;
+
+  @IsOptional()
+  @IsDateString()
+  startDate?: string;
+
+  @IsOptional()
+  @IsDateString()
+  deadline?: string;
+
+  @IsOptional()
+  @IsString()
+  educationLevel?: string;
+
+  @IsOptional()
+  @IsString()
+  course?: string;
+
+  @IsOptional()
+  @IsString()
+  branch?: string;
+
+  @IsOptional()
+  @IsString()
+  state?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  incomeLimit?: number;
+
+  @IsOptional()
+  @IsUrl()
+  applicationUrl?: string;
+
+  @IsOptional()
+  @IsUrl()
+  source?: string;
+
+  @IsBoolean()
+  verified!: boolean;
+
+  @IsBoolean()
+  active!: boolean;
+}
+
+export class ImportScholarshipsDto {
+  @IsArray()
+  @ArrayMinSize(1)
+  @ValidateNested({ each: true })
+  @Type(() => ImportScholarshipRecordDto)
+  records!: ImportScholarshipRecordDto[];
+}

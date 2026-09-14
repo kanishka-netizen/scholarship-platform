@@ -1,0 +1,15 @@
+import * as runtime from "@prisma/client/runtime/client";
+import * as $Class from "./internal/class.ts";
+import * as Prisma from "./internal/prismaNamespace.ts";
+export * as $Enums from './enums.ts';
+export * from "./enums.ts";
+export declare const PrismaClient: $Class.PrismaClientConstructor;
+export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>;
+export { Prisma };
+export type User = Prisma.UserModel;
+export type StudentProfile = Prisma.StudentProfileModel;
+export type Scholarship = Prisma.ScholarshipModel;
+export type SavedScholarship = Prisma.SavedScholarshipModel;
+export type Application = Prisma.ApplicationModel;
+export type StudentDocument = Prisma.StudentDocumentModel;
+export type Notification = Prisma.NotificationModel;

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Next.js
+.next/
+**/.next/
+out/
+
+# NestJS
+dist/
+**/dist/
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+**/.venv/
+venv/
+**/venv/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

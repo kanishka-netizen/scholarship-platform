@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common';
+import { DocumentsController } from './documents.controller.js';
+import { DocumentsService } from './documents.service.js';
+import { SupabaseModule } from '../supabase/supabase.module.js';
+
+@Module({
+  imports: [SupabaseModule],
+  controllers: [DocumentsController],
+  providers: [DocumentsService],
+})
+export class DocumentsModule {}
