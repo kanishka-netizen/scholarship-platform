@@ -69,17 +69,6 @@ describe('scholarship import', () => {
   it('inserts and updates matching records in a 31-record batch without duplicates', async () => {
     const records = new Map<string, { id: string }>();
     let findManyCalls = 0;
-    const transaction = {
-      scholarship: {
-        createMany: async ({ data }: { data: Array<typeof validRecord> }) => {
-          for (const item of data) {
-            records.set(item.applicationUrl ?? `${item.provider}:${item.name}:${item.source}`, { id: `id-${records.size}` });
-          }
-          return { count: data.length };
-        },
-        update: async ({ where }: { where: { id: string } }) => ({ id: where.id }),
-      },
-    };
     const prisma = {
       scholarship: {
         findMany: async () => {
@@ -92,8 +81,14 @@ describe('scholarship import', () => {
             source: 'https://official.example/scheme',
           }));
         },
+        createMany: async ({ data }: { data: Array<typeof validRecord> }) => {
+          for (const item of data) {
+            records.set(item.applicationUrl ?? `${item.provider}:${item.name}:${item.source}`, { id: `id-${records.size}` });
+          }
+          return { count: data.length };
+        },
+        update: async ({ where }: { where: { id: string } }) => ({ id: where.id }),
       },
-      $transaction: async (callback: (value: typeof transaction) => unknown) => callback(transaction),
     };
     const service = new ScholarshipsService(prisma as never);
     const batch = Array.from({ length: 31 }, (_, index) => ({
@@ -111,8 +106,9 @@ describe('scholarship import', () => {
 
   it('keeps listings that share one portal application URL as separate scholarships', async () => {
     const records = new Map<string, { id: string; name: string; provider: string; applicationUrl: string; source: string }>();
-    const transaction = {
+    const prisma = {
       scholarship: {
+        findMany: async () => [...records.values()],
         createMany: async ({ data }: { data: Array<{ name: string; provider: string; applicationUrl?: string; source?: string }> }) => {
           for (const item of data) {
             records.set(`${item.provider}:${item.name}:${item.source}`, {
@@ -127,13 +123,6 @@ describe('scholarship import', () => {
         },
         update: async ({ where }: { where: { id: string } }) => ({ id: where.id }),
       },
-    };
-    const prisma = {
-      scholarship: {
-        findMany: async () => [...records.values()],
-      },
-      $transaction: async (callback: (value: typeof transaction) => unknown) =>
-        callback(transaction),
     };
     const service = new ScholarshipsService(prisma as never);
     const sharedPortal = 'https://scholarships.gov.in/All-Scholarships.action';

@@ -242,18 +242,14 @@ async deleteScholarship(id: string) {
       }
     }
 
-    await this.prisma.$transaction(async (transaction) => {
-      if (inserts.length > 0) {
-        await transaction.scholarship.createMany({
-          data: inserts,
-        });
-      }
-      await Promise.all(
-        updates.map(({ id, data }) =>
-          transaction.scholarship.update({ where: { id }, data }),
-        ),
-      );
-    });
+    if (inserts.length > 0) {
+      await this.prisma.scholarship.createMany({
+        data: inserts,
+      });
+    }
+    for (const { id, data } of updates) {
+      await this.prisma.scholarship.update({ where: { id }, data });
+    }
 
     return {
       recordsReceived: records.length,
