@@ -682,10 +682,6 @@ export type ScholarshipScalarRelationFilter = {
   isNot?: Prisma.ScholarshipWhereInput
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ScholarshipCreateNestedOneWithoutSavedInput = {
   create?: Prisma.XOR<Prisma.ScholarshipCreateWithoutSavedInput, Prisma.ScholarshipUncheckedCreateWithoutSavedInput>
   connectOrCreate?: Prisma.ScholarshipCreateOrConnectWithoutSavedInput

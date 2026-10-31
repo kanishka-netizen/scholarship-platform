@@ -1,0 +1,31 @@
+# Unhardened baseline image: full node Debian base, runs as root
+FROM node:22
+
+WORKDIR /app
+
+# Copy root configuration and backend package files
+COPY package*.json ./
+COPY backend/package*.json ./backend/
+COPY prisma ./prisma
+COPY prisma.config.ts ./
+
+# Install all dependencies (including dev dependencies)
+RUN npm install
+RUN cd backend && npm install
+
+# Copy application source code
+COPY backend ./backend
+
+# Generate Prisma Client
+RUN npx prisma generate
+
+# Build backend
+RUN cd backend && npm run build
+
+# Default environment and root user execution
+ENV PORT=3001
+ENV NODE_ENV=production
+
+EXPOSE 3001
+
+CMD ["node", "backend/dist/main.js"]
