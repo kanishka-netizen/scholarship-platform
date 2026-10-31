@@ -39,7 +39,14 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3001);
+  // Instance identification header for load balancing
+  app.use((_req: any, res: any, next: any) => {
+    res.setHeader('X-Backend-Instance', process.env.INSTANCE_NAME || 'backend-default');
+    next();
+  });
+
+  const port = process.env.PORT ?? 3001;
+  await app.listen(port, '0.0.0.0');
 }
 
 bootstrap();

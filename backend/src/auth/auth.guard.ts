@@ -30,6 +30,30 @@ export class AuthGuard implements CanActivate {
 
     const token = authHeader.substring(7);
 
+    // 1. Verify local JWT token if present
+    try {
+      const { JWT_SECRET } = await import('./auth.service.js');
+      const jwt = (await import('jsonwebtoken')).default;
+      const decoded = jwt.verify(token, JWT_SECRET) as {
+        sub: string;
+        email: string;
+        role: string;
+      };
+
+      if (decoded && decoded.sub) {
+        const user = await this.prisma.user.findUnique({
+          where: { id: decoded.sub },
+        });
+        if (user) {
+          request.user = { id: user.id, email: user.email, role: user.role };
+          request.dbUser = user;
+          return true;
+        }
+      }
+    } catch {
+      // Token is not a local JWT or expired; fall back to Supabase
+    }
+
     const { data, error } =
       await this.supabase
         .getClient()

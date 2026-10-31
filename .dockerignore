@@ -1,0 +1,15 @@
+**/node_modules
+**/dist
+**/.git
+**/.next
+tools
+frontend
+scraper
+docs
+.env
+.env*
+*.log
+*.pdf
+scratch*
+check_*
+query_*

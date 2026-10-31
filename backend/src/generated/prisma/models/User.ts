@@ -28,6 +28,9 @@ export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
   name: string | null
+  password: string | null
+  mfaSecret: string | null
+  mfaEnabled: boolean | null
   googleId: string | null
   role: $Enums.Role | null
   createdAt: Date | null
@@ -38,6 +41,9 @@ export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
   name: string | null
+  password: string | null
+  mfaSecret: string | null
+  mfaEnabled: boolean | null
   googleId: string | null
   role: $Enums.Role | null
   createdAt: Date | null
@@ -48,6 +54,9 @@ export type UserCountAggregateOutputType = {
   id: number
   email: number
   name: number
+  password: number
+  mfaSecret: number
+  mfaEnabled: number
   googleId: number
   role: number
   createdAt: number
@@ -60,6 +69,9 @@ export type UserMinAggregateInputType = {
   id?: true
   email?: true
   name?: true
+  password?: true
+  mfaSecret?: true
+  mfaEnabled?: true
   googleId?: true
   role?: true
   createdAt?: true
@@ -70,6 +82,9 @@ export type UserMaxAggregateInputType = {
   id?: true
   email?: true
   name?: true
+  password?: true
+  mfaSecret?: true
+  mfaEnabled?: true
   googleId?: true
   role?: true
   createdAt?: true
@@ -80,6 +95,9 @@ export type UserCountAggregateInputType = {
   id?: true
   email?: true
   name?: true
+  password?: true
+  mfaSecret?: true
+  mfaEnabled?: true
   googleId?: true
   role?: true
   createdAt?: true
@@ -163,6 +181,9 @@ export type UserGroupByOutputType = {
   id: string
   email: string
   name: string | null
+  password: string | null
+  mfaSecret: string | null
+  mfaEnabled: boolean
   googleId: string | null
   role: $Enums.Role
   createdAt: Date
@@ -194,6 +215,9 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  mfaSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
   googleId?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -209,6 +233,9 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  mfaSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -228,6 +255,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  password?: Prisma.StringNullableFilter<"User"> | string | null
+  mfaSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -242,6 +272,9 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  password?: Prisma.SortOrderInput | Prisma.SortOrder
+  mfaSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -258,6 +291,9 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  mfaSecret?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  mfaEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   googleId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -268,6 +304,9 @@ export type UserCreateInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -283,6 +322,9 @@ export type UserUncheckedCreateInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -298,6 +340,9 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,6 +358,9 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -328,6 +376,9 @@ export type UserCreateManyInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -338,6 +389,9 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -348,6 +402,9 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,6 +415,9 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  mfaSecret?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -368,6 +428,9 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  mfaSecret?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -378,6 +441,9 @@ export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  mfaSecret?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -395,6 +461,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type EnumRoleFieldUpdateOperationsInput = {
@@ -479,6 +549,9 @@ export type UserCreateWithoutProfileInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -493,6 +566,9 @@ export type UserUncheckedCreateWithoutProfileInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -523,6 +599,9 @@ export type UserUpdateWithoutProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -537,6 +616,9 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -551,6 +633,9 @@ export type UserCreateWithoutSavedInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -565,6 +650,9 @@ export type UserUncheckedCreateWithoutSavedInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -595,6 +683,9 @@ export type UserUpdateWithoutSavedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -609,6 +700,9 @@ export type UserUncheckedUpdateWithoutSavedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -623,6 +717,9 @@ export type UserCreateWithoutApplicationsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -637,6 +734,9 @@ export type UserUncheckedCreateWithoutApplicationsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -667,6 +767,9 @@ export type UserUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -681,6 +784,9 @@ export type UserUncheckedUpdateWithoutApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -695,6 +801,9 @@ export type UserCreateWithoutDocumentsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -709,6 +818,9 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -739,6 +851,9 @@ export type UserUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -753,6 +868,9 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -767,6 +885,9 @@ export type UserCreateWithoutNotificationsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -781,6 +902,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   id?: string
   email: string
   name?: string | null
+  password?: string | null
+  mfaSecret?: string | null
+  mfaEnabled?: boolean
   googleId?: string | null
   role?: $Enums.Role
   createdAt?: Date | string
@@ -811,6 +935,9 @@ export type UserUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -825,6 +952,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -897,6 +1027,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   email?: boolean
   name?: boolean
+  password?: boolean
+  mfaSecret?: boolean
+  mfaEnabled?: boolean
   googleId?: boolean
   role?: boolean
   createdAt?: boolean
@@ -913,6 +1046,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   name?: boolean
+  password?: boolean
+  mfaSecret?: boolean
+  mfaEnabled?: boolean
   googleId?: boolean
   role?: boolean
   createdAt?: boolean
@@ -923,6 +1059,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   name?: boolean
+  password?: boolean
+  mfaSecret?: boolean
+  mfaEnabled?: boolean
   googleId?: boolean
   role?: boolean
   createdAt?: boolean
@@ -933,13 +1072,16 @@ export type UserSelectScalar = {
   id?: boolean
   email?: boolean
   name?: boolean
+  password?: boolean
+  mfaSecret?: boolean
+  mfaEnabled?: boolean
   googleId?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "googleId" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mfaSecret" | "mfaEnabled" | "googleId" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   applications?: boolean | Prisma.User$applicationsArgs<ExtArgs>
@@ -964,6 +1106,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     email: string
     name: string | null
+    password: string | null
+    mfaSecret: string | null
+    mfaEnabled: boolean
     googleId: string | null
     role: $Enums.Role
     createdAt: Date
@@ -1399,6 +1544,9 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly mfaSecret: Prisma.FieldRef<"User", 'String'>
+  readonly mfaEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly googleId: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
